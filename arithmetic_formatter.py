@@ -13,7 +13,7 @@ def arithmetic_arranger(problems, display=False):
         else:
             continue
 
-    # remove whitespace
+    # remove whitespace and group equations
     prob_sort = [i.split(" ") for i in problems]
 
     for equation in prob_sort:
