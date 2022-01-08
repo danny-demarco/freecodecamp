@@ -42,7 +42,11 @@ def arithmetic_arranger(problems, display="True"):
             + f"{eval(equation[0] + equation[1] + equation[2])}".rjust(equation[3] + 1)
             + space
         )
-    return print(f"{string1}\n{string2}\n{string3}\n{string4}\n")
+
+    if display == True:
+        return print(f"{string1}\n{string2}\n{string3}\n{string4}\n")
+    else:
+        return None
 
 
 arithmetic_arranger(["444 + 5", "5554 - 3", "6 + 7", "4447 - 5778", "4 - 1"])
