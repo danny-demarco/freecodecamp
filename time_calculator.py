@@ -12,6 +12,7 @@ def add_time(start_time, duration, weekday=None):
         "Saturday",
         "Sunday",
     ]
+
     # Special cases of 12am and 12pm
     if start_list[0] == 12:
         start_list[0] = 0
@@ -39,8 +40,7 @@ def add_time(start_time, duration, weekday=None):
 
     # Find which day it is
     if weekday != None:
-        weekday = weekday.title()
-        start_day = weekdays.index(weekday)
+        start_day = weekdays.index(weekday.title())
         end_day = weekdays[(start_day + int((days_in_hours / 24))) % 7]
 
     # Is it morning or afternoon
@@ -49,7 +49,7 @@ def add_time(start_time, duration, weekday=None):
     if days_in_hours % 24 < 12:
         am_or_pm = "AM"
 
-    new_hour = (start_list[0] + duration_list[0] + hour_min) % 12
+    new_hour = days_in_hours % 12
     if new_hour == 0:
         new_hour = 12
     new_time = f"{new_hour}:{min_min}"
@@ -65,7 +65,4 @@ def add_time(start_time, duration, weekday=None):
         print(f"{new_time} {am_or_pm}, {end_day}")
 
 
-add_time("11:40 AM", "00:25")
-
-
-# Treat 12pm as 12am and 12am as 12pm
+add_time("11:40 AM", "24:25", "fRidAy")
