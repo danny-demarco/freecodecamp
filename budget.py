@@ -1,3 +1,56 @@
+def get_percentages(categories):
+  '''Obtain a list of percentages rounded a multiple of 10'''
+  total_spend = 0
+  category_spend = []
+  for category in categories:
+    total_spend += category.get_withdrawals()
+    category_spend.append(category.get_withdrawals())
+  rounded_values = list(map(lambda x: round_to_ten(x/total_spend), category_spend))
+  return rounded_values
+
+def round_to_ten(n):
+  multiple = 10
+  rounded = int(n * multiple) / multiple
+  return rounded
+
+def create_spend_chart(categories):
+  '''Takes in a list and creates a chart formatted in a specific manner to display percentage spending as a bar chart in string format'''
+  output = "Percentage spent by category\n"
+  i = 100
+  percentages = get_percentages(categories)
+  while i >= 0:
+    spaces = " "
+    for percentage in percentages:
+      if percentage * 100 > i:
+        spaces += "o  "
+      else:
+        spaces = "   "
+    output += str(i).rjust(3) + "|" + spaces + ("\n")
+    i -= 10
+  
+  add_dash = "-" +"---"*len(categories)
+  names = []
+  name_titles = ""
+  for category in categories:
+    names.append(category.name)
+  
+  longest_name = max(names, key=len)
+
+  for x in range(len(longest_name)):
+    name_string = '    '
+    for name in names:
+      if x >= len(name):
+        name_string = "   "
+      else:
+        name_string += name[x] + "  "
+    
+    if x != len(longest_name) -1:
+      name_string += '\n'
+    
+    name_titles += name_string
+
+  output += add_dash.rjust(len(add_dash)+4) + "\n" + name_titles
+  return output
 
 
 class Category:
@@ -29,14 +82,14 @@ class Category:
       return False
 
   def get_balance(self):
-    '''A get_balance method that returns the current balance of the budget category based on the deposits and withdrawals that have occurred.'''
+    '''Finds the current balance'''
     balance = 0
     for item in self.ledger:
       balance += item["amount"]
     return balance
 
   def transfer(self, amount, category):
-    '''A transfer method that accepts an amount and another budget category as arguments. The method should add a withdrawal with the amount and the description "Transfer to [Destination Budget Category]". The method should then add a deposit to the other budget category with the amount and the description "Transfer from [Source Budget Category]". If there are not enough funds, nothing should be added to either ledgers. This method should return True if the transfer took place, and False otherwise.'''
+    '''Transfer = withdraw from one category, and add to another'''
     if self.check_funds(amount):
       self.withdraw(amount, "Transfer to " + category.title)
       category.deposit(amount, "Transferred from" + self.title)
@@ -44,10 +97,15 @@ class Category:
     return False
 
   def check_funds(self, amount):
-    '''A check_funds method that accepts an amount as an argument. It returns False if the amount is greater than the balance of the budget category and returns True otherwise. This method should be used by both the withdraw method and transfer method.'''
+    '''Tests if there are sufficient funds within the account for the next transaction'''
     if amount > self.get_balance(amount):
       return False
     return True
 
-  def create_spend_chart(categories):
-    pass
+  def get_withdrawals(self):
+    '''Add up the total amount spent in this category'''
+    total = 0
+    for item in self.ledger:
+      if item["amount"] < 0:
+        total += item["amount"]
+    return total
