@@ -19,6 +19,11 @@ class Rectangle:
     return (width**2 + height**2)/2
   
   def get_picture(self, width, height):
+    '''prints the shape as a bunch of *'''
+    pass
+
+  def get_amount_inside(self, shape):
+    '''Calculates times the given shape could fit inside this objects shape'''
     pass
 
 
