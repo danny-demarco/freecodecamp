@@ -1,3 +1,8 @@
+def round_to_ten(n):
+  multiple = 10
+  rounded = int(n * multiple) / multiple
+  return rounded
+
 def get_percentages(categories):
   '''Obtain a list of percentages rounded a multiple of 10'''
   total_spend = 0
@@ -8,11 +13,6 @@ def get_percentages(categories):
   rounded_values = list(map(lambda x: round_to_ten(x/total_spend), category_spend))
   return rounded_values
 
-def round_to_ten(n):
-  multiple = 10
-  rounded = int(n * multiple) / multiple
-  return rounded
-
 def create_spend_chart(categories):
   '''Takes in a list and creates a chart formatted in a specific manner to display percentage spending as a bar chart in string format'''
   output = "Percentage spent by category\n"
@@ -21,10 +21,10 @@ def create_spend_chart(categories):
   while i >= 0:
     spaces = " "
     for percentage in percentages:
-      if percentage * 100 > i:
+      if percentage * 100 >= i:
         spaces += "o  "
       else:
-        spaces = "   "
+        spaces += "   "
     output += str(i).rjust(3) + "|" + spaces + ("\n")
     i -= 10
   
@@ -32,19 +32,19 @@ def create_spend_chart(categories):
   names = []
   name_titles = ""
   for category in categories:
-    names.append(category.name)
+    names.append(category.title)
   
   longest_name = max(names, key=len)
 
   for x in range(len(longest_name)):
-    name_string = '    '
+    name_string = '     '
     for name in names:
       if x >= len(name):
-        name_string = "   "
+        name_string += "   "
       else:
         name_string += name[x] + "  "
     
-    if x != len(longest_name) -1:
+    if (x != len(longest_name) -1):
       name_string += '\n'
     
     name_titles += name_string
@@ -67,7 +67,7 @@ class Category:
     ledger_item = ""
     total = 0
     for item in self.ledger:
-      ledger_item += f"{item['description'][0:23]:<23}" + f"{item['amount'][23:]:>7.2f}\n"
+      ledger_item += f"{item['description'][0:23]:<23}" + f"{item['amount']:>7.2f}\n"
       total += item['amount']
     return title + ledger_item + "Total: " + str(total)
 
@@ -92,7 +92,7 @@ class Category:
     '''Transfer = withdraw from one category, and add to another'''
     if self.check_funds(amount):
       self.withdraw(amount, "Transfer to " + category.title)
-      category.deposit(amount, "Transferred from" + self.title)
+      category.deposit(amount, "Transfer from " + self.title)
       return True
     return False
 
