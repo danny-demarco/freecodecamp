@@ -3,11 +3,13 @@ class Rectangle:
     self.width = width
     self.height = height
   
-  def set_width(self, width):
-    return width
+  def set_width(self, new_width):
+    self.width = new_width
+    return
 
-  def set_height(self, height):
-    return height
+  def set_height(self, new_height):
+    self.height = new_height
+    return
 
   def get_area(self, width, height):
     return width * height
@@ -18,9 +20,12 @@ class Rectangle:
   def get_diagonal(self, width, height):
     return (width**2 + height**2)/2
   
-  def get_picture(self, width, height):
+  def get_picture(self):
     '''prints the shape as a bunch of *'''
-    pass
+    picture = ""
+    line = "*" * self.width + "\n"
+    picture += line * self.height
+    print(picture)
 
   def get_amount_inside(self, shape):
     '''Calculates times the given shape could fit inside this objects shape'''
