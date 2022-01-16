@@ -28,7 +28,7 @@ class Rectangle:
     '''prints the shape as a bunch of *'''
     picture = ""
     if self.width > 50 or self.height > 50:
-      picture += "Too big for picture"
+      picture += "Too big for picture."
     else:
       line = "*" * self.width + "\n"
       picture += line * self.height
@@ -42,6 +42,7 @@ class Rectangle:
 
 
 class Square(Rectangle):
+  '''Subclass of Rectangle'''
   
   def __init__(self, sides):
     self.height = sides
