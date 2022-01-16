@@ -27,7 +27,7 @@ def arithmetic_arranger(problems, display=False):
         max_len = max(len(digit) for digit in equation)
         equation.append(max_len + 1)
 
-    # Create output strings
+    # Create output string
     string1 = []
     string2 = []
     string3 = []
