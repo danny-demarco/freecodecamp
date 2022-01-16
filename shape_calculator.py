@@ -15,20 +15,20 @@ class Rectangle:
     self.height = new_height
     return
 
-  def get_area(self, width, height):
-    return width * height
+  def get_area(self):
+    return self.width * self.height
 
-  def get_perimeter(self, width, height):
-    return 2 * height + 2 * width
+  def get_perimeter(self):
+    return 2 * self.height + 2 * self.width
   
-  def get_diagonal(self, width, height):
-    return (width**2 + height**2)/2
+  def get_diagonal(self):
+    return (self.width**2 + self.height**2)**0.5
   
   def get_picture(self):
     '''prints the shape as a bunch of *'''
     picture = ""
     if self.width > 50 or self.height > 50:
-      picture += "too big for picture"
+      picture += "Too big for picture"
     else:
       line = "*" * self.width + "\n"
       picture += line * self.height
@@ -38,7 +38,7 @@ class Rectangle:
     '''Calculates times the given shape could fit inside this objects shape'''
     no_in_width = int(self.width/shape.width)
     no_in_height = int(self.height/shape.height)
-    return max(no_in_height, no_in_width)
+    return no_in_height * no_in_width
 
 
 class Square(Rectangle):
