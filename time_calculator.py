@@ -54,7 +54,7 @@ def add_time(start_time, duration, weekday=None):
         new_hour = 12
     new_time = f"{new_hour}:{min_min}"
 
-    # Formulate output
+    # Formulate various output
     if day_message == None and weekday == None:
         print(f"{new_time} {am_or_pm}")
     if day_message != None and weekday == None:
