@@ -4,7 +4,8 @@ def round_to_ten(n):
   return rounded
 
 def get_percentages(categories):
-  '''Obtain a list of percentages rounded a multiple of 10'''
+
+  '''Obtain a list of percentages rounded by a multiple of 10'''
   total_spend = 0
   category_spend = []
   for category in categories:
@@ -14,6 +15,7 @@ def get_percentages(categories):
   return rounded_values
 
 def create_spend_chart(categories):
+
   '''Takes in a list and creates a chart formatted in a specific manner to display percentage spending as a bar chart in string format'''
   output = "Percentage spent by category\n"
   i = 100
