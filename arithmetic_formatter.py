@@ -50,4 +50,4 @@ def arithmetic_arranger(problems, display=False):
         print(f"{string1}\n{string2}\n{string3}")
 
 
-# print(arithmetic_arranger(["444 + 5", "5554 - 3", "6 + 7", "4447 - 5778", "4 - 1"]))
+print(arithmetic_arranger(["444 + 5", "5554 - 3", "6 + 7", "4447 - 5778", "4 - 1"]))
